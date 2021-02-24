@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{033CFB48-6850-4FE4-B8B5-6BFE091115B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{0D906FC5-B3F8-4590-93D8-0B2EC3460FFC}"
+	ProjectSection(SolutionItems) = preProject
+		src\Controllers\DefaultJoinController.cs = src\Controllers\DefaultJoinController.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{B013EECE-2EAB-40E6-9E18-2E59931C33D6}"
+	ProjectSection(SolutionItems) = preProject
+		src\Models\DefaultJoinSaveModel.cs = src\Models\DefaultJoinSaveModel.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{54E6F38E-2D00-49FD-8D01-C389F2306E33}"
+	ProjectSection(SolutionItems) = preProject
+		src\View\DefaultJoin.xaml = src\View\DefaultJoin.xaml
+		src\View\DefaultJoin.xaml.cs = src\View\DefaultJoin.xaml.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModel", "ViewModel", "{8474CA0A-4FC1-4903-A500-C982A81BBDFA}"
+	ProjectSection(SolutionItems) = preProject
+		src\ViewModel\DefaultJoinViewModel.cs = src\ViewModel\DefaultJoinViewModel.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atomus.Windows.Controls.Join.DefaultJoin(dotNet)", "dotNet\Atomus.Windows.Controls.Join.DefaultJoin(dotNet).csproj", "{53FB5B6C-CF51-48F7-A151-77726190BE7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53FB5B6C-CF51-48F7-A151-77726190BE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FB5B6C-CF51-48F7-A151-77726190BE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FB5B6C-CF51-48F7-A151-77726190BE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FB5B6C-CF51-48F7-A151-77726190BE7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D906FC5-B3F8-4590-93D8-0B2EC3460FFC} = {033CFB48-6850-4FE4-B8B5-6BFE091115B4}
+		{B013EECE-2EAB-40E6-9E18-2E59931C33D6} = {033CFB48-6850-4FE4-B8B5-6BFE091115B4}
+		{54E6F38E-2D00-49FD-8D01-C389F2306E33} = {033CFB48-6850-4FE4-B8B5-6BFE091115B4}
+		{8474CA0A-4FC1-4903-A500-C982A81BBDFA} = {033CFB48-6850-4FE4-B8B5-6BFE091115B4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D6F5D39-74E0-403C-AB69-AAFB77FF6951}
+	EndGlobalSection
+EndGlobal

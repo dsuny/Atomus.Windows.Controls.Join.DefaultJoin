@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="Atomus.Windows.Controls.Join.DefaultJoin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="1024" d:DesignWidth="1280"           
+             Loaded="DefaultJoin_Loaded"
+             MouseLeftButtonDown="MouseLeftButtonDownDragMove">
+    <!--<UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Atomus.Windows.Style.ModernStyle;component/ResourceDictionary/ModernDark/Root.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>-->   
+
+    <Grid x:Name="grid_Main">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="10">
+            <Grid.RowDefinitions>                
+                <RowDefinition/>                
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border BorderThickness="1" BorderBrush="Gray" Margin="2" Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                
+                    <CheckBox x:Name="UserAgreement" Content="이용약관 동의" Width="Auto" Margin="5,0,5,0"
+                              VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Style="{DynamicResource CheckBox_Base}" 
+                          IsChecked="{Binding UserAgreement}" 
+                          IsEnabled="{Binding IsEnabledControl}"/>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer Template="{DynamicResource ScrollViewer_Base}">
+                            <TextBlock Background="White" Text="{Binding UserAgreement_Detail}" IsEnabled="{Binding IsEnabledControl}"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderThickness="1" BorderBrush="Gray" Margin="2" Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="PersonalInformationCollectionAgreement" Content="개인정보 수집 및 이용 동의" Width="Auto" Margin="5,0,5,0"
+                              VerticalAlignment="Center" HorizontalAlignment="Left"
+                      Style="{DynamicResource CheckBox_Base}"
+                      IsChecked="{Binding PersonalInformationCollectionAgreement}" 
+                      IsEnabled="{Binding IsEnabledControl}"/>
+
+                    <Grid Grid.Row="1">
+                        <ScrollViewer Template="{DynamicResource ScrollViewer_Base}">
+                            <TextBlock Background="White" Text="{Binding PersonalInformationCollectionAgreement_Detail}" IsEnabled="{Binding IsEnabledControl}"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>            
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="10"> 
+            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="rdo_New" Grid.Column="0" GroupName="rdoJoin" Content="신규" 
+                                 Style="{DynamicResource RadioButtonStyle1}"
+                                 Command="{Binding RadioCheckedCommand}" CommandParameter="NEW"                                 
+                                 IsChecked="{Binding IsNew}"/>
+                    <RadioButton x:Name="rdo_Password" Grid.Column="1" GroupName="rdoJoin" Content="비밀번호 변경"
+                                 Style="{DynamicResource RadioButtonStyle1}"
+                                 Command="{Binding RadioCheckedCommand}" CommandParameter="PASSWORD"/>
+                </Grid>
+
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                            Visibility="{Binding ElementName=rdo_New, Path=IsChecked, Converter={StaticResource BoolToVisibleConverter}}">
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="이메일" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <TextBox x:Name="JoinEmail" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                        Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                        Text="{Binding JoinEmail}"/>
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="이메일 확인" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <TextBox x:Name="EmailRetry" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                        Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                        Text="{Binding EmailRetry}"/>
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="비밀번호" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <PasswordBox x:Name="AccessNumber" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                                 Height="20" FontSize="{DynamicResource FontSize_11}"
+                                 IsEnabled="{Binding IsEnabledControl}"
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                 Style="{DynamicResource PasswordBox_Login}" 
+                                 Tag="" PasswordChanged="AccessNumber_PasswordChanged"/>
+
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="비밀번호 확인" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <PasswordBox x:Name="AccessNumberRetry" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                                 Height="20" FontSize="{DynamicResource FontSize_11}"
+                                 IsEnabled="{Binding IsEnabledControl}"
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                 Style="{DynamicResource PasswordBox_Login}" 
+                                 Tag="" PasswordChanged="AccessNumberRetry_PasswordChanged"/>
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="별명" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <TextBox x:Name="NickName" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                        Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                        Text="{Binding JoinEmail}"/>
+                    </Grid>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="가입" IsEnabled="{Binding IsEnabledControl}" 
+                                Style="{DynamicResource Btn_Type_2}"
+                                Command="{Binding JoinCommand}"/>
+                        <Button Grid.Column="1" Content="취소" IsEnabled="{Binding IsEnabledControl}" 
+                                Style="{DynamicResource Btn_Type_2}"
+                                Command="{Binding CancelCommand}"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                            Visibility="{Binding ElementName=rdo_Password, Path=IsChecked, Converter={StaticResource BoolToVisibleConverter}}">
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="이메일" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <TextBox x:Name="ChangeEmail" Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                        Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                        Text="{Binding ChangeEmail}"/>
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="기존 비밀번호" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <PasswordBox x:Name="AccessNumberOld" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                                 Height="20" FontSize="{DynamicResource FontSize_11}"
+                                 IsEnabled="{Binding IsEnabledControl}"
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                 Style="{DynamicResource PasswordBox_Login}" 
+                                 Tag="" PasswordChanged="AccessNumberOld_PasswordChanged"/>
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="비밀번호" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <PasswordBox x:Name="AccessNumber2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                                 Height="20" FontSize="{DynamicResource FontSize_11}"
+                                 IsEnabled="{Binding IsEnabledControl}"
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                 Style="{DynamicResource PasswordBox_Login}" 
+                                 Tag="" PasswordChanged="AccessNumber_PasswordChanged"/>
+
+                    </Grid>
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}">
+                        <TextBlock Text="비밀번호 확인" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <PasswordBox x:Name="AccessNumberRetry2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" 
+                                 Height="20" FontSize="{DynamicResource FontSize_11}"
+                                 IsEnabled="{Binding IsEnabledControl}"
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}" 
+                                 Style="{DynamicResource PasswordBox_Login}" 
+                                 Tag="" PasswordChanged="AccessNumberRetry_PasswordChanged"/>
+                    </Grid>
+
+                    <Grid Margin="{DynamicResource Margin_StackPanel_V_Item}" Visibility="Hidden">
+                        <TextBlock Text="" Width="Auto" Style="{DynamicResource TextBlock_OneLineTitle}"/>
+                        <TextBox Height="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                 Margin="{DynamicResource Margin_TextBlock_TextBox_Space}"/>
+                    </Grid>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="비밀번호변경" IsEnabled="{Binding IsEnabledControl}" 
+                                Style="{DynamicResource Btn_Type_2}"
+                                Command="{Binding AccessNumberChangeCommand}"/>
+                        <Button Grid.Column="1" Content="취소" IsEnabled="{Binding IsEnabledControl}" 
+                                Style="{DynamicResource Btn_Type_2}"
+                                Command="{Binding CancelCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    
+</UserControl>
